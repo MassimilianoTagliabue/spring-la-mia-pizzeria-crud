@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <html xmlns:th="http://www.thymeleaf.org">
+
+    </html>
+    <title>Document</title>
+    <th:block th:insert="~{fragments/resources :: headTags}"></th:block>
+</head>
+
+<body>
+
+    <div th:if="${pizzas.size() > 0}">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Nome</th>
+                    <th scope="col">Descrizione</th>
+                    <th scope="col">Prezzo</th>
+                </tr>
+            </thead>
+            <tbody th:each="pizza : ${pizzas}" th:object="${pizza}">
+                <tr>
+                    <th scope="row" th:text="*{id}"></th>
+                    <td th:text="*{name}"></td>
+                    <td th:text="*{description}"></td>
+                    <td th:text="*{price}"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div th:unless="${pizzas.size() > 0}"> pizze non disponibili</div>
+
+
+
+    <div th:replace="~{fragments/resources :: scripts}"></div>
+</body>
+
+</html>

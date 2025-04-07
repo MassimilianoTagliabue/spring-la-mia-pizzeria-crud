@@ -35,8 +35,13 @@ public class Pizza {
     private String image;
 
     @PositiveOrZero
+
+    
     @Min(value = 0)
     private float price;
+    
+    public Pizza() {
+    }
 
     public Integer getId() {
         return this.id;
@@ -80,6 +85,6 @@ public class Pizza {
 
     @Override
     public String toString() {
-        return String.format("%s %s %f", getName(), getDescription(), getPrice());
+        return String.format("%s %s %.2f", getName(), getDescription(), getPrice());
     }
 }

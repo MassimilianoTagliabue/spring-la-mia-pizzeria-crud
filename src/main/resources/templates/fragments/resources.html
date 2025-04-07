@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <html xmlns:th="http://www.thymeleaf.org"></html>
+
+    <th:block th:fragment="headTags">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- style bootstrap -->
+     <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.3/css/bootstrap.min.css}">
+    </th:block>
+    <title>Document</title>
+</head>
+<body>
+    <!-- script -->
+    <div th:fragment="scripts">
+        <script th:src="@{/webjars/bootstrap/5.3.3/js/bootstrap.bundle.min.js}"></script>
+    </div>
+    
+</body>
+</html>
