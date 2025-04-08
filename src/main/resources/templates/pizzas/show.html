@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <html xmlns:th="http://www.thymeleaf.org">
+
+    </html>
+    <title>Pizze</title>
+    <th:block th:insert="~{fragments/resources :: headTags}"></th:block>
+</head>
+
+<body>
+
+    <nav th:replace="~{fragments/navbar :: navbar}"></nav>
+
+    
+    <div class="col-8 mx-auto mt-4" th:if="${pizza}">
+
+        <!-- window.history.back() torna alla pagina precedente -->
+        <button class="btn btn-primary" onclick="window.history.back()">Indietro</button>
+
+        <div class="card mx-auto mt-4 col-6"  th:object="${pizza}">
+            <img th:src="*{image}" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">[[*{name}]]</h5>
+              <div class="card-text">ingredienti : </div>
+              <p class="card-text">[[*{description}]]</p>
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">[[|*{price} $|]]</li>
+            </ul>
+            
+          </div>
+          
+        
+    </div>
+
+    <div th:unless="${pizza}"> pizze non disponibili</div>
+
+
+
+    <div th:replace="~{fragments/resources :: scripts}"></div>
+</body>
+
+</html>
