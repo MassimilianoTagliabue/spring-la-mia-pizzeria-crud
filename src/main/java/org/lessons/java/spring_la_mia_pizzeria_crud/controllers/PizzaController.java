@@ -36,5 +36,12 @@ public class PizzaController {
         return "pizzas/show";
     }
     
+    @GetMapping("/pizza/search")
+    public String findPizza(@RequestParam (name = "name") String name , Model model) {
+        List <Pizza> pizzas = repository.findByNameContaining(name);
+        model.addAttribute("pizzas", pizzas);
+        return "pizzas/index";
+    }
+
     
 }
