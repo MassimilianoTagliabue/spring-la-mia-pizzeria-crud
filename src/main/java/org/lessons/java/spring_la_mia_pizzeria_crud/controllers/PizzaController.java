@@ -31,14 +31,14 @@ public class PizzaController {
 
     @GetMapping("/pizza/{id}")
     public String show(@PathVariable Integer id, Model model) {
-        Pizza pizza = repository.findById(id).get();
+        Pizza pizza = repository.findById(id).get(); //select * from pizza where id=id
         model.addAttribute("pizza", pizza);
         return "pizzas/show";
     }
     
     @GetMapping("/pizza/search")
     public String findPizza(@RequestParam (name = "name") String name , Model model) {
-        List <Pizza> pizzas = repository.findByNameContaining(name);
+        List <Pizza> pizzas = repository.findByNameContaining(name); // select * from pizza where name like %
         model.addAttribute("pizzas", pizzas);
         return "pizzas/index";
     }
