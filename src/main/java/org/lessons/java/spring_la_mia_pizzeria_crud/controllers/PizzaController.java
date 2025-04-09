@@ -58,9 +58,12 @@ public class PizzaController {
     }
 
     @PostMapping("/pizza/create")
-    public String store (@Valid @ModelAttribute ("pizza") Pizza pizzaForm, BindingResult bindingResult, Model model) {
-
-        return "pizzas/create";
+    public String store (@Valid @ModelAttribute ("pizza") Pizza formPizza, BindingResult bindingResult, Model model) {
+        if(bindingResult.hasErrors()){
+            return "pizzas/create";
+        }
+        repository.save(formPizza);
+        return "redirect:/pizza";
     }
     
 }

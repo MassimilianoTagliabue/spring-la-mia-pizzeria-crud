@@ -27,17 +27,15 @@ public class Pizza {
     @NotBlank(message = "campo obbligatorio")
     private String name;
 
-    @NotBlank
+    @NotBlank(message = "campo obbligatorio")
     @Lob
     private String description;
 
-    @NotBlank
+    @NotBlank(message = "campo obbligatorio")
     private String image;
 
-    @PositiveOrZero
-
-    
-    @Min(value = 0)
+    @PositiveOrZero(message = "campo obbligatorio")
+    @Min(value = 1, message = "il valore non può essere zero")
     private float price;
     
     public Pizza() {
