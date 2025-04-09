@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <html xmlns:th="http://www.thymeleaf.org">
+
+    </html>
+    <title>Pizze</title>
+    <th:block th:insert="~{fragments/resources :: headTags}"></th:block>
+</head>
+
+<body>
+
+    <nav th:replace="~{fragments/navbar :: navbar}"></nav>
+
+
+    <div class="col-5 mx-auto mt-4">
+
+
+        <form id="pizza-form" th:action="@{/pizzas/create}" th:object="${pizza}" method="post">
+            <div class="mb-4 ">
+                <label for="name" class="form-label">Nome della pizza:</label>
+                <input type="text" id="name" class="form-control" th:field="*{name}">
+            </div>
+
+            <div class="mb-4 ">
+                <label for="description" class="form-label">ingredienti della pizza:</label>
+                <input type="text" id="description" class="form-control" th:field="*{description}">
+            </div>
+            <div class="mb-4 ">
+                <label for="price" class="form-label">prezzo della pizza:</label>
+                <input type="number" id="price" class="form-control" th:field="*{price}">
+            </div>
+
+            <div class="mb-4 ">
+                <label for="image" class="form-label">immagine della pizza(URL):</label>
+                <input type="text" id="image" class="form-control" th:field="*{image}">
+            </div>
+
+            <div class="mb-3 d-flex justify-content-around">
+                <input type="submit" class="btn btn-primary" value="Aggiungi">
+                <input type="reset" class="btn btn-success" value="Ripristina">
+            </div>
+
+
+        </form>
+    </div>
+
+
+
+    <div th:replace="~{fragments/resources :: scripts}"></div>
+</body>
+
+</html>
