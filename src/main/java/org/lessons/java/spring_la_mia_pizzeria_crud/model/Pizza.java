@@ -15,6 +15,7 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.PositiveOrZero;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "pizzas")
@@ -25,10 +26,12 @@ public class Pizza {
     private Integer id;
 
     @NotBlank(message = "campo obbligatorio")
+    @Size( min=1, max=20, message = "il nome può avere massimo 20 caratteri")
     private String name;
 
     @NotBlank(message = "campo obbligatorio")
     @Lob
+    @Size(min=1, message = "inserire almeno un ingrediente")
     private String description;
 
     @NotBlank(message = "campo obbligatorio")

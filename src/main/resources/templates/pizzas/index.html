@@ -31,13 +31,49 @@
                 ricaricare la pagina,
                 modificare solo parti dell'URL.
                 -->
-                <tr th:each="pizza : ${pizzas}" th:object="${pizza}"
-                    th:onclick="|window.location='@{/pizza/{id}(id=*{id})}'|">
-                    <th scope="row" th:text="*{id}"></th>
-                    <td th:text="*{name}"></td>
-                    <td th:text="*{description}"></td>
-                    <td th:text="*{price}"></td>
+                <tr th:each="pizza : ${pizzas}" th:object="${pizza}">
+                    <th th:onclick="|window.location='@{/pizza/{id}(id=*{id})}'|" scope="row" th:text="*{id}"></th>
+                    <td th:onclick="|window.location='@{/pizza/{id}(id=*{id})}'|" th:text="*{name}"></td>
+                    <td th:onclick="|window.location='@{/pizza/{id}(id=*{id})}'|" th:text="*{description}"></td>
+                    <td th:onclick="|window.location='@{/pizza/{id}(id=*{id})}'|" th:text="*{price}"></td>
+                    <td class="d-flex justify-content-around">
+                        <button class="btn btn-primary"
+                            th:onclick="|window.location='@{/pizza/edit/{id}(id=*{id})}'|">Modifica</button>
+
+                        <!-- modal button -->
+                        <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                            th:data-bs-target="'#deleteModal' + *{id}">
+                            Elimina
+                        </button>
+
+                        <!-- modal -->
+                        <div class="modal fade" th:id="'deleteModal' + *{id}" tabindex="-1" aria-labelledby="exampleModalLabel"
+                            aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="exampleModalLabel"
+                                            th:text="|stai eliminando la Pizza: *{name}|"></h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <!-- close button -->
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Chiudi</button>
+                                        <!-- delete button -->
+                                        <form action="#" th:action="@{/pizza/delete/{id}(id=*{id})}" method="post">
+                                            <button type="submit" class="btn btn-danger">Elimina</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
                 </tr>
+
+
+
+
             </tbody>
         </table>
     </div>

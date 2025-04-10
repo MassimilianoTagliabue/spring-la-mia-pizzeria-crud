@@ -16,10 +16,10 @@
 
     <div class="col-5 mx-auto mt-4">
 
-        <h2 class="text-center my-4">Aggiungi una Pizza</h2>
-        <form id="pizza-form" th:action="@{/pizza/create}" th:object="${pizza}" method="post">
+        <h2 class="text-center my-4">Modifica una Pizza</h2>
 
-            
+        <form id="pizza-form" th:action="@{/pizza/edit/{id}(id =*{id})}" th:object="${pizza}" method="post">
+
 
             <div class="mb-4 ">
                 <label for="name" class="form-label">Nome della pizza:</label>
@@ -70,7 +70,7 @@
             </div>
 
             <div class="mb-3 d-flex justify-content-around">
-                <input type="submit" class="btn btn-primary" value="Aggiungi">
+                <input type="submit" class="btn btn-primary" value="Aggiorna">
                 <input type="reset" class="btn btn-success" value="Ripristina" autocomplete="off">
             </div>
         </form>
