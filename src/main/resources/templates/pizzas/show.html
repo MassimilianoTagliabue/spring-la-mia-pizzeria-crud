@@ -2,44 +2,75 @@
 <html lang="en">
 
 <head>
-    <html xmlns:th="http://www.thymeleaf.org">
+  <html xmlns:th="http://www.thymeleaf.org">
 
-    </html>
-    <title>Pizze</title>
-    <th:block th:insert="~{fragments/resources :: headTags}"></th:block>
+  </html>
+  <title>Pizze</title>
+  <th:block th:insert="~{fragments/resources :: headTags}"></th:block>
 </head>
 
 <body>
 
-    <nav th:replace="~{fragments/navbar :: navbar}"></nav>
+  <nav th:replace="~{fragments/navbar :: navbar}"></nav>
 
-    
-    <div class="col-8 mx-auto mt-4" th:if="${pizza}">
 
-        <!-- window.history.back() torna alla pagina precedente -->
-        <button class="btn btn-primary" onclick="window.history.back()">Indietro</button>
+  <div class="col-8 mx-auto mt-4" th:if="${pizza}">
 
-        <div class="card mx-auto mt-4 col-6"  th:object="${pizza}">
-            <img th:src="*{image}" class="card-img-top" alt="...">
-            <div class="card-body">
-              <h5 class="card-title">[[*{name}]]</h5>
-              <div class="card-text">ingredienti : </div>
-              <p class="card-text">[[*{description}]]</p>
-            </div>
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item">[[|*{price} $|]]</li>
-            </ul>
-            
-          </div>
-          
-        
+    <!-- window.history.back() torna alla pagina precedente -->
+    <button class="btn btn-primary" onclick="window.history.back()">Indietro</button>
+
+    <!-- card pizza -->
+    <div class="card mx-auto mt-4 col-6" th:object="${pizza}">
+      <img th:src="*{image}" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">[[*{name}]]</h5>
+        <div class="card-text">ingredienti : </div>
+        <p class="card-text">[[*{description}]]</p>
+      </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">[[|*{price} $|]]</li>
+      </ul>
+
     </div>
 
-    <div th:unless="${pizza}"> pizze non disponibili</div>
+    <!-- lista offerte -->
+    <div th:if="${pizza.getOffer().size() > 0 }" class="col-6">
+      <h3 class="my-5">offerte di oggi:</h3>
+      <table class="table table-striped ">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Nome</th>
+            <th scope="col">inizio</th>
+            <th scope="col">fine</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="offer : ${pizza.getOffer()}" th:object="${offer}">
+            <td scope="row" th:text="*{id}"></td>
+            <td scope="row" th:text="*{title}"></td>
+            <td th:text="*{startDate}"></td>
+            <td th:text="*{endDate}"></td>
+            <td>
+              <button class="btn btn-primary" th:onclick="|window.location='@{/offer/edit/{id}(id=*{id})}'|">Modifica
+              </button>
+            </td>
+
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="alert alert-secondary mt-5 col-4" role="alert" th:unless="${pizza.getOffer().size() > 0 }">
+      non sono presenti offerte
+    </div>
+  </div>
+
+  <div th:unless="${pizza}"> pizze non disponibili</div>
 
 
 
-    <div th:replace="~{fragments/resources :: scripts}"></div>
+  <div th:replace="~{fragments/resources :: scripts}"></div>
 </body>
 
 </html>

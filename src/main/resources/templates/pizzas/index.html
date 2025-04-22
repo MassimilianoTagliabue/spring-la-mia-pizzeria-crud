@@ -13,7 +13,7 @@
 
     <nav th:replace="~{fragments/navbar :: navbar}"></nav>
 
-    <div class="col-8 mx-auto mt-4" th:if="${pizzas.size() > 0}">
+    <div class="col-10 mx-auto mt-4" th:if="${pizzas.size() > 0}">
         <table class="table table-striped">
             <thead>
                 <tr>
@@ -24,12 +24,7 @@
                 </tr>
             </thead>
             <tbody>
-                <!-- window.location 
-                 
-                leggere l'URL attuale,
-                navigare verso un altro URL,
-                ricaricare la pagina,
-                modificare solo parti dell'URL.
+                <!-- window.location leggere l'URL attuale,navigare verso un altro URL,ricaricare la pagina, modificare solo parti dell'URL.
                 -->
                 <tr th:each="pizza : ${pizzas}" th:object="${pizza}">
                     <th th:onclick="|window.location='@{/pizza/{id}(id=*{id})}'|" scope="row" th:text="*{id}"></th>
@@ -38,7 +33,12 @@
                     <td th:onclick="|window.location='@{/pizza/{id}(id=*{id})}'|" th:text="*{price}"></td>
                     <td class="d-flex justify-content-around">
                         <button class="btn btn-primary"
-                            th:onclick="|window.location='@{/pizza/edit/{id}(id=*{id})}'|">Modifica</button>
+                            th:onclick="|window.location='@{/pizza/edit/{id}(id=*{id})}'|">Modifica
+                        </button>
+
+                        <button class="btn btn-success"
+                            th:onclick="|window.location='@{/pizza/{id}/offer(id=*{id})}'|">Offerta
+                        </button>
 
                         <!-- modal button -->
                         <button type="button" class="btn btn-danger" data-bs-toggle="modal"

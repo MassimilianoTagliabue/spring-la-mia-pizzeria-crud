@@ -1,6 +1,7 @@
 package org.lessons.java.spring_la_mia_pizzeria_crud.model;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -8,6 +9,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Lob;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
@@ -40,6 +42,19 @@ public class Pizza {
     @PositiveOrZero(message = "campo obbligatorio")
     @Min(value = 1, message = "il valore non può essere zero")
     private float price;
+
+    // relazione tra una pizza e N sconti
+    @OneToMany( mappedBy = "pizza")
+    private List<Offer> offers;
+
+
+    public List<Offer> getOffer() {
+        return this.offers;
+    }
+
+    public void setOffer(List<Offer> offers) {
+        this.offers = offers;
+    }
     
     public Pizza() {
     }
