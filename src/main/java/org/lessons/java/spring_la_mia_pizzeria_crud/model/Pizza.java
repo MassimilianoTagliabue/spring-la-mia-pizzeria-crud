@@ -8,7 +8,10 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
 import jakarta.persistence.Lob;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Min;
@@ -37,6 +40,7 @@ public class Pizza {
     private String description;
 
     @NotBlank(message = "campo obbligatorio")
+    @Lob
     private String image;
 
     @PositiveOrZero(message = "campo obbligatorio")
@@ -46,6 +50,14 @@ public class Pizza {
     // relazione tra una pizza e N sconti
     @OneToMany( mappedBy = "pizza")
     private List<Offer> offers;
+
+    @ManyToMany()
+    @JoinTable(
+        name = "ingredient-pizza",
+        joinColumns = @JoinColumn(name="pizza_id"),
+        inverseJoinColumns = @JoinColumn(name="ingredient_id")
+    )
+    private List<Ingredient> ingredients;
 
 
     public List<Offer> getOffer() {

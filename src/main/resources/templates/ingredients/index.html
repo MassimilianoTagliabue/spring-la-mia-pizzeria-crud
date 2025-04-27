@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <html xmlns:th="http://www.thymeleaf.org">
+
+    </html>
+    <title>Pizze</title>
+    <th:block th:insert="~{fragments/resources :: headTags}"></th:block>
+</head>
+
+<body>
+
+    <nav th:replace="~{fragments/navbar :: navbar}"></nav>
+
+    <div class="col-10 mx-auto mt-4" th:if="${ingredients.size() > 0}">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Nome</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- window.location leggere l'URL attuale,navigare verso un altro URL,ricaricare la pagina, modificare solo parti dell'URL.
+                -->
+                <tr th:each="ingredient : ${ingredients}" th:object="${ingredient}">
+                    <th scope="row" th:text="*{id}"></th>
+                    <td th:text="*{name}"></td>
+                    <td class="d-flex justify-content-around">
+                        <button class="btn btn-primary"
+                            th:onclick="|window.location='@{/ingredient/edit/{id}(id=*{id})}'|">Modifica
+                        </button>
+
+                        <!-- modal button -->
+                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" 
+                            th:data-bs-target="'#deleteModal' + *{id}">
+                            Elimina
+                        </button>
+
+                        <!-- modal -->
+                        <div class="modal fade" th:id="'deleteModal' + *{id}" tabindex="-1" aria-labelledby="exampleModalLabel"
+                            aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="exampleModalLabel"
+                                            th:text="|stai eliminando l'ingredient: *{name}|"></h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <!-- close button -->
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Chiudi</button>
+                                        <!-- delete button -->
+                                        <form action="#" th:action="@{/ingredient/delete/{id}(id=*{id})}" method="post">
+                                            <button type="submit" class="btn btn-danger">Elimina</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+
+
+            </tbody>
+        </table>
+    </div>
+    
+    <div th:unless="${ingredients.size() > 0}" class="col-8 mx-auto mt-4">
+       <div class="alert alert-warning ">ingredienti non disponibili</div>
+    </div>
+
+
+    <div th:replace="~{fragments/resources :: scripts}"></div>
+</body>
+
+</html>
