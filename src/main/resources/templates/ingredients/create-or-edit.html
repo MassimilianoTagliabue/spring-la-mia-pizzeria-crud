@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <html xmlns:th="http://www.thymeleaf.org">
+
+    </html>
+    <title>offerte</title>
+    <th:block th:insert="~{fragments/resources :: headTags}"></th:block>
+</head>
+
+<body>
+
+    <nav th:replace="~{fragments/navbar :: navbar}"></nav>
+
+
+    <div class="col-5 mx-auto mt-4">
+
+        <h2 class="text-center my-4">Aggiungi un nuovo ingrediente </h2>
+        <form id="ingredient" th:action="${edit} ? @{|/ingredient/edit/${ingredient.id}|} : @{/ingredient/create}" 
+        th:object="${ingredient}" method="post">
+
+
+            <div class="mb-4 ">
+                <label for="name" class="form-label">Nome dell' Ingrediente:</label>
+                <input type="text" id="name" class="form-control" th:field="*{name}" autocomplete="off" th:errorClass="is-invalid">
+                <div class="invalid-feedback" th:if="${#fields.hasErrors('name')}">    
+                    <ul>
+                        <li th:each="error : ${#fields.errors('name')}" th:text="${error}"></li>
+                    </ul>
+                    
+                </div>
+            </div>
+
+
+            <div class="mb-3 d-flex justify-content-around">
+                <input type="submit" class="btn btn-primary" value="Aggiorna">
+                <input type="reset" class="btn btn-success" value="Ripristina" autocomplete="off">
+            </div>
+        </form>
+        
+    </div>
+
+
+
+    <div th:replace="~{fragments/resources :: scripts}"></div>
+</body>
+
+</html>

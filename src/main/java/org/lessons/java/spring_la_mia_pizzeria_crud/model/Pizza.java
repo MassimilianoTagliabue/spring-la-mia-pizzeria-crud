@@ -36,7 +36,7 @@ public class Pizza {
 
     @NotBlank(message = "campo obbligatorio")
     @Lob
-    @Size(min=1, message = "inserire almeno un ingrediente")
+    @Size(min=1, message = "inserire una descrizione")
     private String description;
 
     @NotBlank(message = "campo obbligatorio")
@@ -58,6 +58,22 @@ public class Pizza {
         inverseJoinColumns = @JoinColumn(name="ingredient_id")
     )
     private List<Ingredient> ingredients;
+
+    public List<Offer> getOffers() {
+        return this.offers;
+    }
+
+    public void setOffers(List<Offer> offers) {
+        this.offers = offers;
+    }
+
+    public List<Ingredient> getIngredients() {
+        return this.ingredients;
+    }
+
+    public void setIngredients(List<Ingredient> ingredients) {
+        this.ingredients = ingredients;
+    }
 
 
     public List<Offer> getOffer() {

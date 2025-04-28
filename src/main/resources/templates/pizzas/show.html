@@ -27,11 +27,23 @@
         <div class="card-text">ingredienti : </div>
         <p class="card-text">[[*{description}]]</p>
       </div>
+      <!-- ingredienti -->
+      <th:block th:if="${pizza.getIngredients().size()>0}">
+        <h4 >Ingredienti:</h4>
+        <ul >
+          <li th:each="ingredient : ${ingredients}" th:text="${ingredient.name}"></li>
+        </ul>
+      </th:block>
+      <th:block th:unless="${pizza.getIngredients().size()>0}">
+          <div class="alert alert-success">non ci sono Ingredienti</div>
+      </th:block>
+
       <ul class="list-group list-group-flush">
         <li class="list-group-item">[[|*{price} $|]]</li>
       </ul>
-
     </div>
+
+
 
     <!-- lista offerte -->
     <div th:if="${pizza.getOffer().size() > 0 }" class="col-6">

@@ -49,7 +49,7 @@ public class OfferController {
     }
 
     @PostMapping("/edit/{id}")
-    public String postMethodName(@Valid 
+    public String update(@Valid 
             @ModelAttribute("offer") Offer formOffer,
             BindingResult bindingResult,
             Model model) {

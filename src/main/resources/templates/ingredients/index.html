@@ -14,6 +14,8 @@
     <nav th:replace="~{fragments/navbar :: navbar}"></nav>
 
     <div class="col-10 mx-auto mt-4" th:if="${ingredients.size() > 0}">
+        <button class="btn btn-primary mb-3" 
+        th:onclick="|window.location='@{/ingredient/create}'|"> Aggiungi Ingrediente</button>
         <table class="table table-striped">
             <thead>
                 <tr>
