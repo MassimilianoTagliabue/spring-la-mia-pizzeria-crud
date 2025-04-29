@@ -52,10 +52,7 @@ public class Ingredient {
         this.name = name;
     }
     
-    @Override
-    public String toString(){
-        return String.format("%d", name);
-    }
+    
 
 
 }
