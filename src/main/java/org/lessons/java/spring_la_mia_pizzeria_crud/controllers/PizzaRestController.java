@@ -11,6 +11,9 @@ import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import jakarta.validation.Valid;
+
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -48,12 +51,12 @@ public class PizzaRestController {
 
 
     @PostMapping
-    public ResponseEntity<Pizza> store(@RequestBody Pizza pizza) {
+    public ResponseEntity<Pizza> store(@Valid @RequestBody Pizza pizza) {
         return new ResponseEntity<Pizza>(pizzaService.createOrUpdate(pizza), HttpStatus.OK);
     }
     
     @PutMapping("/{id}")
-    public ResponseEntity<Pizza> update(@PathVariable Integer id, @RequestBody Pizza pizza) {
+    public ResponseEntity<Pizza> update(@Valid @PathVariable Integer id, @RequestBody Pizza pizza) {
         
         if(pizzaService.findById(id).isEmpty()){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -64,7 +67,7 @@ public class PizzaRestController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Pizza> delete(@PathVariable Integer id){
+    public ResponseEntity<Pizza> delete(@Valid @PathVariable Integer id){
         Optional<Pizza> pizza = pizzaService.findById(id);
 
         if(pizza.isEmpty()){
