@@ -64,6 +64,23 @@
 			<scope>test</scope>
 		</dependency>
 
+<!-- modulo spring security -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- thymeleaf security -->
+		<dependency>
+			<groupId>org.thymeleaf.extras</groupId>
+			<artifactId>thymeleaf-extras-springsecurity6</artifactId>
+		</dependency>
+
 <!-- https://mvnrepository.com/artifact/org.webjars/bootstrap -->
 		<dependency>
 		<groupId>org.webjars</groupId>
