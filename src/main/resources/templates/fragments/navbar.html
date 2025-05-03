@@ -16,17 +16,23 @@
           </button>
           <div class="collapse navbar-collapse" id="navbarScroll">
             <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
-              <li class="nav-item">
+              <li class="nav-item" sec:authorize="hasAuthority('ADMIN')">
                 <a class="nav-link" th:href="@{http://localhost:8080/ingredient}">Ingredienti</a>
               </li>
-              <li class="nav-item">
+              <li class="nav-item" sec:authorize="hasAuthority('ADMIN')">
                 <a class="nav-link" th:href="@{http://localhost:8080/pizza/create}">Aggiungi una Pizza</a>
               </li>
             </ul>
             <form class="d-flex" role="search" th:action="@{http://localhost:8080/pizza/search}" method="get">
               <input class="form-control me-2" type="text" name="name" placeholder="Search" aria-label="Search" autocomplete="off">
-              <button class="btn btn-outline-success" type="submit">Search</button>
+              <button class="btn btn-outline-success " type="submit">Search</button>
             </form>
+            <div class="text-white">
+              Utente : <span sec:authentication="name" class="fw-bold me-2"></span>
+              Ruolo : <span  sec:authentication="principal.authorities" class="fst-italic me-2"></span>
+              <a class="btn btn-sm btn-outline-success" href="/logout">Esci</a>
+            </div>
+
           </div>
         </div>
       </nav>
